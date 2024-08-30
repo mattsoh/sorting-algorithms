@@ -16,7 +16,6 @@ def insertion(lst):
             lst[j + 1] = lst[j]
             j -= 1
         lst[j + 1] = key
-
     return lst
 
 def merge(lst):

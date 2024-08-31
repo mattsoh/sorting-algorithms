@@ -134,18 +134,19 @@ def slow(lst, left = None, right = None):
     slow(lst, left, right-1)
     return lst
 
-inp = [4,21,6,45,3,546]
-algs = {"bubble": bubble, "insertion": insertion, "merge": merge, "selection": selection, "radix": radix, "quick": quick, "tree": tree,"bogo": bogo, "slow": slow}
-choice = input("All ('1') or just one('2')? Input:")
-if choice == "1":
-    print("Which sorting algorithm would you like?")
-    print("")
-    option = input("Input: ")
-    print(getTime(algs[option], inp))
-else:
-    times = {}
-    for i in algs:
-        res = getTime(algs[i], inp)
-        times[i] = res[0]
-    print(times)
-    print(sorted(times, key=lambda x:x[1]))
+if __name__ == "__main__":
+    inp = [4,21,6,45,3,546]
+    algs = {"bubble": bubble, "insertion": insertion, "merge": merge, "selection": selection, "radix": radix, "quick": quick, "tree": tree,"bogo": bogo, "slow": slow}
+    choice = input("All ('1') or just one('2')? Input:")
+    if choice == "1":
+        print("Which sorting algorithm would you like?")
+        print("")
+        option = input("Input: ")
+        print(getTime(algs[option], inp))
+    else:
+        times = {}
+        for i in algs:
+            res = getTime(algs[i], inp)
+            times[i] = res[0]
+        print(times)
+        print(sorted(times, key=lambda x:x[1]))

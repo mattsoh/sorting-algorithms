@@ -66,28 +66,31 @@ def radix(lst):
 
 
 
-def quick(lst):
+def quick(lst, left = None, right = None):
+    if left == None: left = 0
+    if right == None: right = len(lst)
     if right-left < 1:
         return lst
-    pivotloc = random.choice(lst)
-    pivot = array.pop(pivotloc)
+    pivotloc = random.randint(left, right)
+    pivot = lst.pop(pivotloc)
     pointer = left
     while pointer <= right-1:
-        if array[pointer] > pivot and pivotloc > pointer:
-            array.insert(right-1,array.pop(pointer))
+        print(pointer, pivot)
+        if lst[pointer] > pivot and pivotloc > pointer:
+            lst.insert(right-1,lst.pop(pointer))
             pivotloc -= 1
-        elif array[pointer] < pivot and pivotloc <= pointer:
-            array.insert(left,array.pop(pointer))
+        elif lst[pointer] < pivot and pivotloc <= pointer:
+            lst.insert(left,lst.pop(pointer))
             pointer += 1
             pivotloc += 1
         else:
             pointer += 1
-    array.insert(pivotloc,pivot)
+    lst.insert(pivotloc,pivot)
     quick(left,pivotloc)
     quick(pivotloc+1, right)
-    return
-# quick(0,len(array)-1)
-# print(array)
+    return lst
+# quick(0,len(lst)-1)
+# print(lst)
 
 print("Which sorting algorithm would you like?")
 print("")

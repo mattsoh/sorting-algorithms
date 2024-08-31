@@ -1,23 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 
+export function selectSort(lst) {
+  
+}
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="select">
+    <select id="select" value={selectedSort} onChange="{(e) => selectSort(e.target.value)}" multiple>
+    <option value="bubbleSort">Bubble Sort</option>
+    <option value="mergeSort">Merge Sort</option>
+    </select>
     </div>
   );
 }

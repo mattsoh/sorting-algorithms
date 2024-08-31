@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="vizewport" content="width=device-width, initial-scale=1" />
-    <title>Sorting Algorithms Comparisons</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithm Comparisons</title>
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="select">
+    <select id="dropdown" value={selectedSort} onChange="{(e) => selectSort(e.target.value)}">
+    <option value="bubbleSort">Bubble Sort</option>
+    <option value="mergeSort">Merge Sort</option>
+  </select>
+</div>
+</body>
 </html>

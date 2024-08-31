@@ -1,9 +1,11 @@
 import random
 import time
 
-def getTime(type, lst):
+
+def getTime(option, lst):
     start = time.process_time()
-    res = type(lst)
+    print(option)
+    res = algs[option](lst)
     return (time.process_time())*10000 - start, res
 
 def bubble(lst):
@@ -134,9 +136,10 @@ def slow(lst, left = None, right = None):
     slow(lst, left, right-1)
     return lst
 
+algs = {"bubble": bubble, "insertion": insertion, "merge": merge, "selection": selection, "radix": radix, "quick": quick, "tree": tree,"bogo": bogo, "slow": slow}
+
 if __name__ == "__main__":
     inp = [4,21,6,45,3,546]
-    algs = {"bubble": bubble, "insertion": insertion, "merge": merge, "selection": selection, "radix": radix, "quick": quick, "tree": tree,"bogo": bogo, "slow": slow}
     choice = input("All ('1') or just one('2')? Input:")
     if choice == "1":
         print("Which sorting algorithm would you like?")
@@ -146,7 +149,7 @@ if __name__ == "__main__":
     else:
         times = {}
         for i in algs:
-            res = getTime(algs[i], inp)
+            res = getTime(i, inp)
             times[i] = res[0]
         print(times)
         print(sorted(times, key=lambda x:x[1]))

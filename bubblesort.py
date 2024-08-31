@@ -1,6 +1,6 @@
 import random
 import time
-
+        
 def bubble(lst):
     for i in range(len(lst)):
         changed = False
@@ -89,8 +89,26 @@ def quick(lst, left = None, right = None):
     quick(left,pivotloc)
     quick(pivotloc+1, right)
     return lst
-# quick(0,len(lst)-1)
-# print(lst)
+# 
+def tree(lst):
+    def heapify(i,n):
+        largest = i
+        left = 2*i+1
+        right = 2*i+2
+        if left<n and lst[left]>lst[largest]:
+            largest = left
+        if right<n and lst[right]>lst[largest]:
+            largest = right
+        if largest!=i:
+            lst[i],lst[largest] = lst[largest],lst[i]
+            heapify(largest,n)
+    n = len(lst)
+    for i in range(n//2-1,-1,-1):
+        heapify(i,n)
+    for i in range(n-1,0,-1):
+        lst[0],lst[i]=lst[i],lst[0]
+        heapify(0,i)
+    return lst
 
 print("Which sorting algorithm would you like?")
 print("")

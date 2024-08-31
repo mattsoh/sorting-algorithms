@@ -1,6 +1,11 @@
 import random
 import time
-        
+
+def getTime(type, lst):
+    start = time.process_time()
+    res = type(lst)
+    return (time.process_time())*10000 - start, res
+
 def bubble(lst):
     for i in range(len(lst)):
         changed = False
@@ -40,14 +45,15 @@ def merge(lst):
     return ret
   
 def selection(lst):
-  n = len(lst)
-  for i in range(n):
+    n = len(lst)
+    for i in range(n):
         min_idx = i
         for j in range(i + 1, n):
             if lst[j] < lst[min_idx]:
                 min_idx = j
-        (lst[i], lst[min_idx]) = (lst[min_idx], lst[i])
-      
+            lst[i], lst[min_idx] = lst[min_idx], lst[i]
+    return lst
+    
 def radix(lst):
     maxx = max(lst)
     exp = 1
@@ -115,21 +121,31 @@ def bogo(lst):
         random.shuffle(lst)
     return lst
 
-def slow_sort(A, i, j):
-    if i >= j:
-        return
-    m = (i + j) // 2
-    slow_sort(A, i, m)
-    slow_sort(A, m + 1, j)
-    if (A[j] < A[m]):
-        temp = A[m]
-        A[m] = A[j]
-        A[j] = temp
-    slow_sort(A, i, j-1)
-print("Which sorting algorithm would you like?")
-print("")
-option = input("Input: ")
-start = time.process_time()
-res = eval(option)([4,21,6,45,3,546])
-print(time.process_time() - start)
-print(res)
+def slow(lst, left = None, right = None):
+    if left == None: left = 0
+    if right == None: right = len(lst)-1
+    if left >= right:
+        return lst
+    mid = (left + right)//2
+    slow(lst, left, mid)
+    slow(lst, mid+1, right)
+    if (lst[right] < lst[mid]):
+        lst[mid], lst[right] = lst[right], lst[mid]
+    slow(lst, left, right-1)
+    return lst
+
+inp = [4,21,6,45,3,546]
+algs = {"bubble": bubble, "insertion": insertion, "merge": merge, "selection": selection, "radix": radix, "quick": quick, "tree": tree,"bogo": bogo, "slow": slow}
+choice = input("All ('1') or just one('2')? Input:")
+if choice == "1":
+    print("Which sorting algorithm would you like?")
+    print("")
+    option = input("Input: ")
+    print(getTime(algs[option], inp))
+else:
+    times = {}
+    for i in algs:
+        res = getTime(algs[i], inp)
+        times[i] = res[0]
+    print(times)
+    print(sorted(times, key=lambda x:x[1]))

@@ -63,33 +63,28 @@ def radix(lst):
         exp += 1
     return lst
 
-
-
-
 def quick(lst, left = None, right = None):
     if left == None: left = 0
-    if right == None: right = len(lst)
-    if right-left < 1:
-        return lst
-    pivotloc = random.randint(left, right)
-    pivot = lst.pop(pivotloc)
-    pointer = left
-    while pointer <= right-1:
-        print(pointer, pivot)
-        if lst[pointer] > pivot and pivotloc > pointer:
-            lst.insert(right-1,lst.pop(pointer))
-            pivotloc -= 1
-        elif lst[pointer] < pivot and pivotloc <= pointer:
-            lst.insert(left,lst.pop(pointer))
-            pointer += 1
-            pivotloc += 1
-        else:
-            pointer += 1
-    lst.insert(pivotloc,pivot)
-    quick(left,pivotloc)
-    quick(pivotloc+1, right)
+    if right == None: right = len(lst)-1
+    if left >= right:
+        return
+    pivot_index = random.randint(left, right)
+    pivot = lst[pivot_index]
+    i = left
+    j = right
+    while i <= j:
+        while lst[i] < pivot:
+            i += 1
+        while lst[j] > pivot:
+            j -= 1
+        if i <= j:
+            lst[i], lst[j] = lst[j], lst[i]
+            i += 1
+            j -= 1
+    quick(lst, left, j)
+    quick(lst, i, right)
     return lst
-# 
+
 def tree(lst):
     def heapify(i,n):
         largest = i
@@ -110,6 +105,27 @@ def tree(lst):
         heapify(0,i)
     return lst
 
+def bogo(lst):
+    def isSorted(lst):
+        for i in range(len(lst) - 1):
+            if lst[i] > lst[i + 1]:
+                return False
+        return True
+    while not isSorted(lst):
+        random.shuffle(lst)
+    return lst
+
+def slow_sort(A, i, j):
+    if i >= j:
+        return
+    m = (i + j) // 2
+    slow_sort(A, i, m)
+    slow_sort(A, m + 1, j)
+    if (A[j] < A[m]):
+        temp = A[m]
+        A[m] = A[j]
+        A[j] = temp
+    slow_sort(A, i, j-1)
 print("Which sorting algorithm would you like?")
 print("")
 option = input("Input: ")

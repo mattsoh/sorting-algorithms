@@ -63,6 +63,29 @@ def radix(lst):
         exp += 1
     return lst
 
+
+
+
+def quick(lst):
+    if right-left < 1:
+        return lst
+    pivotloc = random.choice(lst)
+    pivot = array.pop(pivotloc)
+    pointer = left
+    while pointer <= right-1:
+        if array[pointer] > pivot and pivotloc > pointer:
+            array.insert(right-1,array.pop(pointer))
+            pivotloc -= 1
+        elif array[pointer] < pivot and pivotloc <= pointer:
+            array.insert(left,array.pop(pointer))
+            pointer += 1
+            pivotloc += 1
+        else:
+            pointer += 1
+    array.insert(pivotloc,pivot)
+    quick(left,pivotloc)
+    quick(pivotloc+1, right)
+    return
 # quick(0,len(array)-1)
 # print(array)
 

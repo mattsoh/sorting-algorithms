@@ -8,7 +8,7 @@ class App extends React.Component {
     this.state = {
       response: "Nothing yet!"
     };
-    this.handleSort = this.handleSort.bind(this); // Bind the method
+    this.handleSort = this.handleSort.bind(this);
   }
 
   handleSort() {
@@ -34,8 +34,22 @@ class App extends React.Component {
       }
     }
     console.log(responses);
-    this.setState(responses);
-    console.log(this.state.response, "set")
+    this.res = responses;
+    this.setState({response: responses} );
+    console.log(this.state, "set")
+    Promise.all(this.res).then(responses => {
+      const validResponses = responses.filter(response => response.value !== 'Error').map(response => response.value);
+      const mean = validResponses.reduce((a, b) => a + b, 0) / validResponses.length;
+      const stdDev = Math.sqrt(validResponses.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / validResponses.length);
+      const zScores = responses.map(response => {
+        if (response.value === 'Error') {
+          return { ...response, zScore: null };
+        }
+        const zScore = (response.value - mean) / stdDev;
+        return { ...response, zScore };
+      });
+      this.setState({ response: zScores });
+    });
   }
 
   handleCheckboxChange(event) {

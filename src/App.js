@@ -22,7 +22,8 @@ class App extends React.Component {
           .then(res => {
             const data = res.data;
             console.log(data);
-            responses.push([checkbox.value, data[0]]);
+            responses.push(`${checkbox.value}: ${data[0]}`);
+            console.log(responses)
             // this.setState({ response: [checkbox.value, data[0]] });
           })
           .catch(error => {
@@ -32,7 +33,9 @@ class App extends React.Component {
           });
       }
     }
-    this.setState({ response: responses });
+    console.log(responses);
+    this.setState(responses);
+    console.log(this.state.response, "set")
   }
 
   handleCheckboxChange(event) {
@@ -53,15 +56,15 @@ class App extends React.Component {
     return (
       <div>
         <div className="checkbox-container">
-          <input type="checkbox" id="bubble" className="sortBox" value="Bubble Sort" onChange={this.handleCheckboxChange}/>
+          <input type="checkbox" id="bubble" className="sortBox" value="Bubble Sort" onChange={this.handleCheckboxChange} selected/>
           <label htmlFor="bubble">Bubble Sort</label>
         </div>
         <div>
-          <input type="checkbox" id="insertion" className="sortBox" value="Insertion Sort" onChange={this.handleCheckboxChange}/>
+          <input type="checkbox" id="insertion" className="sortBox" value="Insertion Sort" onChange={this.handleCheckboxChange} selected/>
           <label htmlFor="insertion">Insertion Sort</label>
         </div>
         <div>
-          <input type="checkbox" id="merge" className="sortBox" value="Merge Sort" onChange={this.handleCheckboxChange}/>
+          <input type="checkbox" id="merge" className="sortBox" value="Merge Sort" onChange={this.handleCheckboxChange} selected  />
           <label htmlFor="merge">Merge Sort</label>
         </div>
         <div>
@@ -95,11 +98,13 @@ class App extends React.Component {
         <button onClick={this.handleSort}>See Comparisons!</button>
         <br />
         <h2>Results:</h2>
-        {this.state.response ? (
-          <pre>{JSON.stringify(this.state.response, null, 2)}</pre>
-        ) : (
-          <p>No results yet.</p>
-        )}
+        <div id="responses">
+          {this.state.response ? (
+            <pre>{JSON.stringify(this.state.response, null, 2)}</pre>
+          ) : (
+            <p>No results yet.</p>
+          )}
+        </div>
       </div>
     );
   }

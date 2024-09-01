@@ -136,7 +136,62 @@ def slow(lst, left = None, right = None):
     slow(lst, left, right-1)
     return lst
 
-algs = {"bubble": bubble, "insertion": insertion, "merge": merge, "selection": selection, "radix": radix, "quick": quick, "tree": tree,"bogo": bogo, "slow": slow}
+def shell(lst):
+    n = len(lst)
+    gap = n//2
+    while gap > 0:
+        for i in range(gap, n):
+            temp = lst[i]
+            j = i
+            while j >= gap and lst[j - gap] > temp:
+                lst[j] = lst[j - gap]
+                j -= gap
+            lst[j] = temp
+        gap //= 2
+    return lst
+
+import math
+import heapq
+
+def intro(lst):
+    def partition(lst, low, high):
+        pivot = lst[low]
+        left = low + 1
+        right = high
+        done = False
+        while not done:
+            while left <= right and lst[left] <= pivot:
+                left = left + 1
+            while lst[right] >= pivot and right >= left:
+                right = right - 1
+            if right < left:
+                done = True
+            else:
+                lst[left], lst[right] = lst[right], lst[left]
+        lst[low], lst[right] = lst[right], lst[low]
+        return right
+
+    def heapsort(lst, start, end):
+        heap = lst[start:end]
+        heapq.heapify(heap)
+        for i in range(start, end):
+            lst[i] = heapq.heappop(heap)
+
+    def introsort(lst, start, end, maxdepth):
+        if end - start <= 1:
+            return
+        if maxdepth == 0:
+            heapsort(lst, start, end)
+        else:
+            pivot = partition(lst, start, end - 1)
+            introsort(lst, start, pivot, maxdepth - 1)
+            introsort(lst, pivot + 1, end, maxdepth - 1)
+
+    maxdepth = int(math.log2(len(lst))) * 2
+    introsort(lst, 0, len(lst), maxdepth)
+    return lst
+        
+algs = {"bubble": bubble, "insertion": insertion, "merge": merge, "selection": selection, "radix": radix, "quick": quick, "tree": tree,"bogo": bogo, "slow": slow, "shell":shell, "intro":intro}
 
 if __name__ == "__main__":
     inp = [4,21,6,45,3,546]
@@ -145,7 +200,7 @@ if __name__ == "__main__":
         print("Which sorting algorithm would you like?")
         print("")
         option = input("Input: ")
-        print(getTime(algs[option], inp))
+        print(getTime(option, inp))
     else:
         times = {}
         for i in algs:

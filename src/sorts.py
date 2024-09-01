@@ -6,7 +6,7 @@ def getTime(option, lst):
     start = time.process_time()
     print(option)
     res = algs[option](lst)
-    return (time.process_time())*10000 - start, res
+    return (time.process_time()) - start, res
 
 def bubble(lst):
     for i in range(len(lst)):

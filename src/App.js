@@ -16,10 +16,15 @@ class App extends React.Component {
     for (const checkbox of checkboxes) {
       if (checkbox.checked) {
         axios.get(`http://localhost:8080/query?type=${checkbox.id}&list=${document.getElementById('inputList').value}`)
-        .then(res => {
+          .then(res => {
             const data = res.data;
             this.setState({ response: data });
-        });
+          })
+          .catch(error => {
+            console.error('There was an error making request for '+ checkbox.value + ":", error);
+            window.alert('There was an error making the request for ' + checkbox.value + '. Please try again later.');
+            return;
+          });
       }
     }
   }
@@ -33,8 +38,7 @@ class App extends React.Component {
       }
     }
     if (checkedCount > 3) {
-      window.alert("You can only select up to 3 checkboxes.");
-      // Uncheck the last checkbox that was checked
+      window.alert("You can only select up to 3 algorithms.");
       event.target.checked = false;
     }
   }
@@ -42,21 +46,41 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <input type="checkbox" id="selectionSort" className="sortBox" value="selectionSort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="selectionSort">Selection Sort</label>
+        <div className="checkbox-container">
+          <input type="checkbox" id="bubble" className="sortBox" value="Bubble Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="bubble">Bubble Sort</label>
         </div>
         <div>
-          <input type="checkbox" id="bubbleSort" className="sortBox" value="bubbleSort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="bubbleSort">Bubble Sort</label>
-        </div>
-        <div> 
-          <input type="checkbox" id="mergeSort" className="sortBox" value="mergeSort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="mergeSort">Merge Sort</label>
+          <input type="checkbox" id="insertion" className="sortBox" value="Insertion Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="insertion">Insertion Sort</label>
         </div>
         <div>
-          <input type="checkbox" id="quickSort" className="sortBox" value="quickSort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="quickSort">Quick Sort</label>
+          <input type="checkbox" id="merge" className="sortBox" value="Merge Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="merge">Merge Sort</label>
+        </div>
+        <div>
+          <input type="checkbox" id="selection" className="sortBox" value="Selection Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="selection">Selection Sort</label>
+        </div>
+        <div>
+          <input type="checkbox" id="radix" className="sortBox" value="Radix Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="radix">Radix Sort</label>
+        </div>
+        <div>
+          <input type="checkbox" id="quick" className="sortBox" value="Quick Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="quick">Quick Sort</label>
+        </div>
+        <div>
+          <input type="checkbox" id="tree" className="sortBox" value="Tree Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="tree">Tree Sort</label>
+        </div>
+        <div>
+          <input type="checkbox" id="bogo" className="sortBox" value="Bogo Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="bogo">Bogo Sort</label>
+        </div>
+        <div>
+          <input type="checkbox" id="slow" className="sortBox" value="Slow Sort" onChange={this.handleCheckboxChange}/>
+          <label htmlFor="slow">Slow Sort</label>
         </div>
         <br />
         <label htmlFor="input-list">Enter List:</label>

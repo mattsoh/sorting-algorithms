@@ -7,18 +7,23 @@ class App extends React.Component {
     super(props);
     this.state = {
       response: "Nothing yet!"
-      
     };
+    this.handleSort = this.handleSort.bind(this); // Bind the method
   }
 
   handleSort() {
     const checkboxes = document.getElementsByClassName('sortBox');
+    let responses = [];
     for (const checkbox of checkboxes) {
       if (checkbox.checked) {
-        axios.get(`http://localhost:8080/query?type=${checkbox.id}&list=${document.getElementById('inputList').value}`)
+        // window.alert(encodeURIComponent(document.getElementById('inputList').value));
+        // window.alert(`http://localhost:8080/query?type=${checkbox.id}&list=${encodeURIComponent(document.getElementById('inputList').value)}`)
+        axios.get(`http://localhost:8080/query?type=${checkbox.id}&list=${encodeURIComponent(document.getElementById('inputList').value)}`)
           .then(res => {
             const data = res.data;
-            this.setState({ response: data });
+            console.log(data);
+            responses.push([checkbox.value, data[0]]);
+            // this.setState({ response: [checkbox.value, data[0]] });
           })
           .catch(error => {
             console.error('There was an error making request for '+ checkbox.value + ":", error);
@@ -27,6 +32,7 @@ class App extends React.Component {
           });
       }
     }
+    this.setState({ response: responses });
   }
 
   handleCheckboxChange(event) {

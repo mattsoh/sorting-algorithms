@@ -70,40 +70,60 @@ class App extends React.Component {
     return (
       <div>
         <div className="checkbox-container">
-          <input type="checkbox" id="bubble" className="sortBox" value="Bubble Sort" onChange={this.handleCheckboxChange} selected/>
-          <label htmlFor="bubble">Bubble Sort</label>
-        </div>
-        <div>
-          <input type="checkbox" id="insertion" className="sortBox" value="Insertion Sort" onChange={this.handleCheckboxChange} selected/>
-          <label htmlFor="insertion">Insertion Sort</label>
-        </div>
-        <div>
-          <input type="checkbox" id="merge" className="sortBox" value="Merge Sort" onChange={this.handleCheckboxChange} selected  />
-          <label htmlFor="merge">Merge Sort</label>
-        </div>
-        <div>
-          <input type="checkbox" id="selection" className="sortBox" value="Selection Sort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="selection">Selection Sort</label>
-        </div>
-        <div>
-          <input type="checkbox" id="radix" className="sortBox" value="Radix Sort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="radix">Radix Sort</label>
-        </div>
-        <div>
-          <input type="checkbox" id="quick" className="sortBox" value="Quick Sort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="quick">Quick Sort</label>
-        </div>
-        <div>
-          <input type="checkbox" id="tree" className="sortBox" value="Tree Sort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="tree">Tree Sort</label>
-        </div>
-        <div>
-          <input type="checkbox" id="bogo" className="sortBox" value="Bogo Sort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="bogo">Bogo Sort</label>
-        </div>
-        <div>
-          <input type="checkbox" id="slow" className="sortBox" value="Slow Sort" onChange={this.handleCheckboxChange}/>
-          <label htmlFor="slow">Slow Sort</label>
+          <div>
+            <input type="checkbox" id="bubble" className="sortBox" value="Bubble Sort" onChange={this.handleCheckboxChange} selected/>
+            <label htmlFor="bubble">
+              <a href="/explanations.html#bubble" style={{ textDecoration: 'none', color: 'inherit' }}>Bubble Sort</a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="insertion" className="sortBox" value="Insertion Sort" onChange={this.handleCheckboxChange} selected/>
+            <label htmlFor="insertion">
+              <a href="/explanations.html#insertion" style={{ textDecoration: 'none', color: 'inherit' }}>Insertion Sort</a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="merge" className="sortBox" value="Merge Sort" onChange={this.handleCheckboxChange} selected/>
+            <label htmlFor="merge">
+              <a href="/explanations.html#merge" style={{ textDecoration: 'none', color: 'inherit' }}>Merge Sort</a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="selection" className="sortBox" value="Selection Sort" onChange={this.handleCheckboxChange}/>
+            <label htmlFor="selection">
+              <a href="/explanations.html#selection" style={{ textDecoration: 'none', color: 'inherit' }}>Selection Sort</a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="radix" className="sortBox" value="Radix Sort" onChange={this.handleCheckboxChange}/>
+            <label htmlFor="radix">
+              <a href="/explanations.html#radix" style={{ textDecoration: 'none', color: 'inherit' }}>Radix Sort</a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="quick" className="sortBox" value="Quick Sort" onChange={this.handleCheckboxChange}/>
+            <label htmlFor="quick">
+              <a href="/explanations.html#quick" style={{ textDecoration: 'none', color: 'inherit' }}>Quick Sort</a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="tree" className="sortBox" value="Tree Sort" onChange={this.handleCheckboxChange}/>
+            <label htmlFor="tree">
+              <a href="/explanations.html#tree" style={{ textDecoration: 'none', color: 'inherit' }}>Tree Sort</a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="bogo" className="sortBox" value="Bogo Sort" onChange={this.handleCheckboxChange}/>
+            <label htmlFor="bogo">
+              <a href="/explanations.html#bogo" style={{ textDecoration: 'none', color: 'inherit' }}>Bogo Sort</a>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="slow" className="sortBox" value="Slow Sort" onChange={this.handleCheckboxChange}/>
+            <label htmlFor="slow">
+              <a href="/explanations.html#slow" style={{ textDecoration: 'none', color: 'inherit' }}>Slow Sort</a>
+            </label>
+          </div>
         </div>
         <br />
         <label htmlFor="input-list">Enter List:</label>
